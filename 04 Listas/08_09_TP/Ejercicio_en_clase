@@ -1,0 +1,45 @@
+import random,time
+
+filas = 5
+columnas = 5
+
+numeros_bingo = random.sample(range(1,51),filas*columnas)
+numero_sorteo = list(range(1,51))
+random.shuffle(numero_sorteo)   #Los mezclo antes del bucle en una lista aparte, evitando la repetición
+
+
+bingo_matriz = [numeros_bingo [_*columnas:(_+1)*columnas] for _ in range(filas)]    #Creamos la matriz con compresión
+
+print("-------BINGO-------")    #Prints iniciales
+print(f"Preparando tu cartón...")
+time.sleep(1.5)
+for fila in bingo_matriz:
+    print(fila)
+
+
+while numero_sorteo:    #En teoria si se acaban los números se acaba el bucle
+
+    sorteo = numero_sorteo.pop()    #Agarramos un número de la lista y o eliminamos para que no repita
+    encontrado = False
+
+    print ("__________________________________\n")
+    print("Se sortea el número...\n")
+    print(f"            {sorteo}\n")
+
+    for i in range(filas):  #Ingresamos a la matriz y reemplazamos con cero
+        for j in range(columnas):
+            if sorteo == bingo_matriz[i][j]:
+                bingo_matriz[i][j] = 0
+                encontrado = True   #No pude hacer los prints adentro por que claramente se repetian todas las veces que buscamos en la matriz
+
+    if encontrado:
+        print("Lo tenes felicidades! Tachalo :)") 
+    else:
+        print("No lo tenes, sigamos!")
+
+    for fila in bingo_matriz:   #Muestro el carton actualizado
+        print(f"fila")    
+    
+    if all(all(valor == 0 for valor in fila) for fila in bingo_matriz): #Formula para que cuando toda la matriz sea 0 corte el while
+            print("BINGO!\n Puede reclamar el premio en 'calle falsa 123', lo esperamos!")
+            break
