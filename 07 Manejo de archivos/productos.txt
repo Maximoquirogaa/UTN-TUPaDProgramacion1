@@ -1,0 +1,5 @@
+nombre,precio,cantidad
+lapicera,120.5,30
+coca,2500,120
+river_camiseta,120000,15
+lavandina,3560,40juguete,7560.99,6computadora,1000000.0,2
